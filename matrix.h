@@ -13,9 +13,12 @@ public:
     Matrix(std::vector<std::string> vec);
 
     std::pair<int, int> size();
-    void reset();
-    void resetToE();
+    void deleteRow(int n);
+    void deleteColumn(int n);
+    Matrix& toNull(int n);
+    Matrix& toE(int n);
     void transpose();
+    int determinant();
     Matrix pow(int degree);
     void copy(Matrix& m);
 
@@ -28,7 +31,8 @@ public:
 
 private:
     std::vector<std::vector<int>> table;
-
+    
+    int determinant(std::vector<std::vector<int>> m);
 };
 
 #endif // MATRIX_H

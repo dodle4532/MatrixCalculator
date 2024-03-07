@@ -1,4 +1,6 @@
 #include "matrix.h"
+#include <cmath>
+#include <iostream>
 
 Matrix::Matrix(std::vector<std::vector<int>> vec) {
     table = vec;
@@ -39,21 +41,42 @@ std::pair<int, int> Matrix::size() {
     return std::make_pair<int, int> (table.size(), table[0].size());
 }
 
-void Matrix::reset() {
-    for (int i = 0; i < size().first; ++i) {
-        std::fill(table[i].begin(), table[i].end(), 0);
+void Matrix::deleteRow(int n) {
+    table.erase(table.begin() + n);
+}
+void Matrix::deleteColumn(int n) {
+    for (int i = 0; i < table.size(); ++i) {
+        table[i].erase(table[i].begin() + n);
     }
 }
 
-void Matrix::resetToE() {
-    reset();
-    for (int i = 0; i < size().first; ++i) {
-        for (int j = 0; j < size().second; ++j) {
+Matrix& Matrix::toNull(int n) {
+    std::vector<std::vector<int>> v;
+    for (int i = 0; i < n; ++i) {
+        v.resize(v.size() + 1);
+        for (int j = 0; j < n; ++j) {
+            v[i].push_back(0);
+        }
+    }
+    table = v;
+    return *this;
+}
+
+Matrix& Matrix::toE(int n) {
+    std::vector<std::vector<int>> v;
+    for (int i = 0; i < n; ++i) {
+        v.resize(v.size() + 1);
+        for (int j = 0; j < n; ++j) {
             if (i == j) {
-                table[i][j] = 1;
+                v[i].push_back(1);
+            }
+            else {
+                v[i].push_back(0);
             }
         }
     }
+    table = v;
+    return *this;
 }
 
 void Matrix::transpose() {
@@ -70,9 +93,41 @@ void Matrix::copy(Matrix& m) {
     table = m.table;
 }
 
+int Matrix::determinant(std::vector<std::vector<int>> m) {
+    int det = 0;
+    if (m.size() == 1) {
+        return m[0][0];
+    }
+    for (int j = 0; j < m.size(); ++j) {
+        Matrix minor(m);
+        minor.deleteRow(0);
+        minor.deleteColumn(j);
+        det += m[0][j] * std::pow(-1,j) * determinant(minor.table);
+    }
+    return det;
+}
+
+int Matrix::determinant() {
+    return determinant(table);
+}
+
+
 Matrix Matrix::pow(int degree) {
     Matrix m(*this);
-    m.resetToE();
+    int det = determinant();
+    if (degree == -1) {
+        for (int i = 0; i < table.size(); ++i) {
+            for (int j = 0; j < table.size(); ++j) {
+                Matrix copy(*this);
+                copy.deleteRow(i);
+                copy.deleteColumn(j);
+                m[i][j] = std::pow(-1, i + j) * determinant(copy.table) / (det);
+            }
+        }
+        m.transpose();
+        return m;
+    }
+    m.toE(size().first);
     for (int i = 0; i < degree; ++i) {
         m = m * *this;
     }

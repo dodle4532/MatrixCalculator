@@ -20,9 +20,9 @@ int main(int argc, char *argv[])
     // Matrix m(vec);
     // std::cout << m;
 
-    std::vector<std::vector<int>> v = {{1, 2},
-                                        {3, 4}};
+    std::vector<std::vector<float>> v = {{1, 1},
+                                        {1, 4}};
     Matrix m(v);
-    std::cout << m.determinant();
+    std::cout << m.pow(-1);
     return 0;
 }

@@ -9,30 +9,30 @@ class Matrix
 {
 public:
     Matrix() = default;
-    Matrix(std::vector<std::vector<int>> vec);
+    Matrix(std::vector<std::vector<float>> vec);
     Matrix(std::vector<std::string> vec);
 
-    std::pair<int, int> size();
-    void deleteRow(int n);
-    void deleteColumn(int n);
-    Matrix& toNull(int n);
-    Matrix& toE(int n);
+    std::pair<float, float> size();
+    void deleteRow(float n);
+    void deleteColumn(float n);
+    Matrix& toNull(float n);
+    Matrix& toE(float n);
     void transpose();
-    int determinant();
-    Matrix pow(int degree);
+    float determinant();
+    Matrix pow(float degree);
     void copy(Matrix& m);
 
     friend std::ostream& operator<<(std::ostream& out, Matrix m);
     Matrix& operator+(Matrix& m);
     Matrix& operator*(Matrix& m);
 
-    std::vector<int>& operator[](int index);
+    std::vector<float>& operator[](float index);
 
 
 private:
-    std::vector<std::vector<int>> table;
+    std::vector<std::vector<float>> table;
     
-    int determinant(std::vector<std::vector<int>> m);
+    float determinant(std::vector<std::vector<float>> m);
 };
 
 #endif // MATRIX_H

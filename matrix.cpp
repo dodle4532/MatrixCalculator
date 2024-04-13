@@ -1,9 +1,18 @@
 #include "matrix.h"
 #include <cmath>
 #include <iomanip>
+#include <iostream>
+#include <numeric>
 
 Matrix::Matrix(std::vector<std::vector<float>> vec) {
     table = vec;
+    if (vec.size() > 1) {
+        for (int i = 1; i < table.size(); ++i) {
+            if (table[i].size() != table[0].size()) {
+                throw std::invalid_argument("Invalid vector(different number of columns)"); 
+            }
+        }
+    }
 }
 
 Matrix::Matrix(std::vector<std::string> vec) {
@@ -29,10 +38,33 @@ Matrix::Matrix(std::vector<std::string> vec) {
             throw std::invalid_argument("Incorrect data");
         }
     }
-    float size = table[0].size();
-    for (int i = 1; i < table.size(); ++i) {
-        if (size != table[i].size()) {
-            throw std::invalid_argument("Incorrect data - different size of lines");
+    if (table.size() > 1) {
+        for (int i = 1; i < table.size(); ++i) {
+            if (table[i].size() != table[0].size()) {
+                throw std::invalid_argument("Invalid vector(different number of columns)"); 
+            }
+        }
+    }
+}
+
+Matrix::Matrix(std::string filename) {
+    std::fstream fd(filename);
+    if (!(fd.is_open())) {
+        throw std::invalid_argument("File isn't open");
+    }
+    std::vector<std::string> v;
+    std::string str;
+    while (!(fd.eof())) {
+        std::getline(fd, str);
+        v.push_back(str);
+    }
+    Matrix m(v);
+    table = m.table;
+    if (table.size() > 1) {
+        for (int i = 1; i < table.size(); ++i) {
+            if (table[i].size() != table[0].size()) {
+                throw std::invalid_argument("Invalid vector(different number of columns)"); 
+            }
         }
     }
 }
@@ -79,7 +111,10 @@ Matrix& Matrix::toE(float n) {
     return *this;
 }
 
-void Matrix::transpose() {
+Matrix& Matrix::transpose() {
+    if (!isQuadratic()) {
+        throw std::invalid_argument("Matrix isn't quadratic");
+    }
     for (int i = 0; i < size().first; ++i) {
         for (int j = 0; j < i + 1; ++j) {
             float tmp = table[i][j];
@@ -87,6 +122,7 @@ void Matrix::transpose() {
             table[j][i] = tmp;
         }
     }
+    return *this;
 }
 
 void Matrix::copy(Matrix& m) {
@@ -94,6 +130,9 @@ void Matrix::copy(Matrix& m) {
 }
 
 float Matrix::determinant(std::vector<std::vector<float>> m) {
+    if (!isQuadratic()) {
+        throw std::invalid_argument("Matrix isn't quadratic");
+    }
     float det = 0;
     if (m.size() == 1) {
         return m[0][0];
@@ -112,7 +151,14 @@ float Matrix::determinant() {
 }
 
 
-Matrix Matrix::pow(float degree) {
+Matrix Matrix::pow(int degree) {
+    if (!isQuadratic()) {
+        throw std::invalid_argument("Matrix isn't quadratic");
+    }
+    if (degree == 0) {
+        Matrix copy(*this);
+        return copy.toE(copy.size().first);
+    }
     Matrix m(*this);
     float det = determinant();
     if (degree == -1) {
@@ -134,7 +180,7 @@ Matrix Matrix::pow(float degree) {
     return m;
 }
 
-std::vector<float>& Matrix::operator[](float index) {
+std::vector<float>& Matrix::operator[](int index) {
     if (index < 0 || index > size().first - 1) {
         throw std::out_of_range("Incorrect index");
     }
@@ -143,7 +189,7 @@ std::vector<float>& Matrix::operator[](float index) {
 
 Matrix& Matrix::operator+(Matrix& m) {
     if (m.size() != size()) {
-        throw std::out_of_range("Different size of matrices");
+        throw std::invalid_argument("Different size of matrices");
     }
     for (int i = 0; i < size().first; ++i) {
         for (int j = 0; j < size().second; ++j) {
@@ -155,7 +201,7 @@ Matrix& Matrix::operator+(Matrix& m) {
 
 Matrix& Matrix::operator*(Matrix& m) {
     if (m.size().second != size().first) {
-        throw std::out_of_range("Different size of matrices");
+        throw std::invalid_argument("Different size of matrices");
     }
     std::vector<std::vector<float>> v;
     std::vector<float> string;
@@ -176,6 +222,23 @@ Matrix& Matrix::operator*(Matrix& m) {
     }
     copy(matrix);
     return *this;
+}
+
+bool Matrix::operator==(Matrix& m) {
+    if (table == m.table) {
+        return true;
+    }
+    return false;
+}
+
+bool Matrix::isQuadratic() {
+    if (table.size() == 0) {
+        return true;
+    }
+    if (table.size() == table[0].size()) {
+        return true;
+    }
+    return false;
 }
 
 

@@ -1,0 +1,59 @@
+\doxysection{matrix.\+h}
+\hypertarget{matrix_8h_source}{}\label{matrix_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ MATRIX\_H}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ MATRIX\_H}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <ostream>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_matrix}{Matrix}}}
+\DoxyCodeLine{00020\ \{}
+\DoxyCodeLine{00021\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{class_matrix}{Matrix}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00039\ \ \ \ \ \mbox{\hyperlink{class_matrix}{Matrix}}(std::vector<std::vector<float>>\ vec);}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00056\ \ \ \ \ \mbox{\hyperlink{class_matrix}{Matrix}}(std::vector<std::string>\ vec);}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00070\ \ \ \ \ \mbox{\hyperlink{class_matrix}{Matrix}}(std::string\ filename);}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00087\ \ \ \ \ std::pair<float,\ float>\ \mbox{\hyperlink{class_matrix_a895b53416971374f0f70b141d705b0b4}{size}}();}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00107\ \ \ \ \ \mbox{\hyperlink{class_matrix}{Matrix}}\&\ \mbox{\hyperlink{class_matrix_aa5811e28e2c23a4a92960efed9c3990c}{toNull}}(\textcolor{keywordtype}{float}\ n);}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00127\ \ \ \ \ \mbox{\hyperlink{class_matrix}{Matrix}}\&\ \mbox{\hyperlink{class_matrix_ac7ab36482084929801e3422179dcfef2}{toE}}(\textcolor{keywordtype}{float}\ n);}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00149\ \ \ \ \ \mbox{\hyperlink{class_matrix}{Matrix}}\&\ \mbox{\hyperlink{class_matrix_ad609fedfd61e93679803bb114e544569}{transpose}}();}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_matrix_ab853044b1d89a9fcd62d122228a9f10c}{determinant}}();}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00193\ \ \ \ \ \mbox{\hyperlink{class_matrix}{Matrix}}\ \mbox{\hyperlink{class_matrix_a2db389056c84d893c5efcdcbdaed5f73}{pow}}(\textcolor{keywordtype}{int}\ degree);}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00199\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_matrix_a596203ab71640c5c24042d8a23478f9a}{copy}}(\mbox{\hyperlink{class_matrix}{Matrix}}\&\ m);}
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00204\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_matrix_ad4128ad9e3c9ffc9b1970772d381d1b1}{isQuadratic}}();}
+\DoxyCodeLine{00205\ }
+\DoxyCodeLine{00210\ \ \ \ \ \textcolor{keyword}{friend}\ std::ostream\&\ \mbox{\hyperlink{class_matrix_ae285effeb13307abef36fea80dcac4f0}{operator<<}}(std::ostream\&\ out,\ \mbox{\hyperlink{class_matrix}{Matrix}}\ m);}
+\DoxyCodeLine{00211\ }
+\DoxyCodeLine{00215\ \ \ \ \ \mbox{\hyperlink{class_matrix}{Matrix}}\&\ \mbox{\hyperlink{class_matrix_a7cc7127ce96c997c9d14f1f8874ed742}{operator+}}(\mbox{\hyperlink{class_matrix}{Matrix}}\&\ m);}
+\DoxyCodeLine{00216\ }
+\DoxyCodeLine{00220\ \ \ \ \ \mbox{\hyperlink{class_matrix}{Matrix}}\&\ \mbox{\hyperlink{class_matrix_ae1bc7e1fda06dab52353ac01b3196efd}{operator*}}(\mbox{\hyperlink{class_matrix}{Matrix}}\&\ m);}
+\DoxyCodeLine{00221\ }
+\DoxyCodeLine{00225\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_matrix_a4e49a68514e786e91e1a67f97d0763f4}{operator==}}(\mbox{\hyperlink{class_matrix}{Matrix}}\&\ m);}
+\DoxyCodeLine{00226\ }
+\DoxyCodeLine{00242\ \ \ \ \ std::vector<float>\&\ \mbox{\hyperlink{class_matrix_a0bdc7d34c8630c79c8fe67b131e62d68}{operator[]}}(\textcolor{keywordtype}{int}\ index);}
+\DoxyCodeLine{00243\ }
+\DoxyCodeLine{00244\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00245\ \ \ \ \ std::vector<std::vector<float>>\ table;}
+\DoxyCodeLine{00246\ \ \ \ \ \textcolor{keywordtype}{void}\ deleteRow(\textcolor{keywordtype}{float}\ n);}
+\DoxyCodeLine{00247\ \ \ \ \ \textcolor{keywordtype}{void}\ deleteColumn(\textcolor{keywordtype}{float}\ n);}
+\DoxyCodeLine{00248\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_matrix_ab853044b1d89a9fcd62d122228a9f10c}{determinant}}(std::vector<std::vector<float>>\ m);}
+\DoxyCodeLine{00249\ \};}
+\DoxyCodeLine{00250\ }
+\DoxyCodeLine{00251\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ MATRIX\_H}}
+
+\end{DoxyCode}

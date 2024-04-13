@@ -1,0 +1,361 @@
+\doxysection{Matrix Class Reference}
+\hypertarget{class_matrix}{}\label{class_matrix}\index{Matrix@{Matrix}}
+
+
+{\bfseries{Class to work with matrices}}  
+
+
+
+
+{\ttfamily \#include $<$matrix.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_matrix_a4acbad349a6e741b1122053d99d4fbb9}{Matrix}} (std\+::vector$<$ std\+::vector$<$ float $>$ $>$ vec)
+\begin{DoxyCompactList}\small\item\em Constructor which convert vector to \doxylink{class_matrix}{Matrix}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_matrix_ac6c12fa8f111c7326f88cad460ae9701}{Matrix}} (std\+::vector$<$ std\+::string $>$ vec)
+\begin{DoxyCompactList}\small\item\em Constructor which convert string to Matrices, can be used for reading from file. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_matrix_a11298232ac274b1b2aed13b181634c55}{Matrix}} (std\+::string filename)
+\begin{DoxyCompactList}\small\item\em Constructor which create \doxylink{class_matrix}{Matrix} from file(numbers divided by spaces and ENTERs) \end{DoxyCompactList}\item 
+std\+::pair$<$ float, float $>$ \mbox{\hyperlink{class_matrix_a895b53416971374f0f70b141d705b0b4}{size}} ()
+\begin{DoxyCompactList}\small\item\em Get\textquotesingle{}s size of matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_matrix}{Matrix}} \& \mbox{\hyperlink{class_matrix_aa5811e28e2c23a4a92960efed9c3990c}{to\+Null}} (float n)
+\begin{DoxyCompactList}\small\item\em Method to convert any matrix to n\texorpdfstring{$\ast$}{*}n matrix with all zeros. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_matrix}{Matrix}} \& \mbox{\hyperlink{class_matrix_ac7ab36482084929801e3422179dcfef2}{toE}} (float n)
+\begin{DoxyCompactList}\small\item\em Method to convert any matrix to n\texorpdfstring{$\ast$}{*}n Identity matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_matrix}{Matrix}} \& \mbox{\hyperlink{class_matrix_ad609fedfd61e93679803bb114e544569}{transpose}} ()
+\begin{DoxyCompactList}\small\item\em Method to transpose matrices. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_matrix_ab853044b1d89a9fcd62d122228a9f10c}{determinant}} ()
+\begin{DoxyCompactList}\small\item\em Method to calcucate determinant. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_matrix}{Matrix}} \mbox{\hyperlink{class_matrix_a2db389056c84d893c5efcdcbdaed5f73}{pow}} (int degree)
+\begin{DoxyCompactList}\small\item\em Method to raise quadratic matrix to any n degree. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_matrix_a596203ab71640c5c24042d8a23478f9a}{copy}} (\mbox{\hyperlink{class_matrix}{Matrix}} \&m)
+\begin{DoxyCompactList}\small\item\em Method to copy other \doxylink{class_matrix}{Matrix} to this. \end{DoxyCompactList}\item 
+\Hypertarget{class_matrix_ad4128ad9e3c9ffc9b1970772d381d1b1}\label{class_matrix_ad4128ad9e3c9ffc9b1970772d381d1b1} 
+bool {\bfseries is\+Quadratic} ()
+\begin{DoxyCompactList}\small\item\em Checks if matrix is Quadratic or Not. \end{DoxyCompactList}\item 
+\Hypertarget{class_matrix_a7cc7127ce96c997c9d14f1f8874ed742}\label{class_matrix_a7cc7127ce96c997c9d14f1f8874ed742} 
+\mbox{\hyperlink{class_matrix}{Matrix}} \& {\bfseries operator+} (\mbox{\hyperlink{class_matrix}{Matrix}} \&m)
+\begin{DoxyCompactList}\small\item\em Operator to add two Matrices. \end{DoxyCompactList}\item 
+\Hypertarget{class_matrix_ae1bc7e1fda06dab52353ac01b3196efd}\label{class_matrix_ae1bc7e1fda06dab52353ac01b3196efd} 
+\mbox{\hyperlink{class_matrix}{Matrix}} \& {\bfseries operator\texorpdfstring{$\ast$}{*}} (\mbox{\hyperlink{class_matrix}{Matrix}} \&m)
+\begin{DoxyCompactList}\small\item\em Operator to multiply to matrices. \end{DoxyCompactList}\item 
+\Hypertarget{class_matrix_a4e49a68514e786e91e1a67f97d0763f4}\label{class_matrix_a4e49a68514e786e91e1a67f97d0763f4} 
+bool {\bfseries operator==} (\mbox{\hyperlink{class_matrix}{Matrix}} \&m)
+\begin{DoxyCompactList}\small\item\em Operator to check if matrices is equal or not. \end{DoxyCompactList}\item 
+std\+::vector$<$ float $>$ \& \mbox{\hyperlink{class_matrix_a0bdc7d34c8630c79c8fe67b131e62d68}{operator\mbox{[}$\,$\mbox{]}}} (int index)
+\begin{DoxyCompactList}\small\item\em Operator thats returns row under index number. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ostream \& \mbox{\hyperlink{class_matrix_ae285effeb13307abef36fea80dcac4f0}{operator$<$$<$}} (std\+::ostream \&out, \mbox{\hyperlink{class_matrix}{Matrix}} m)
+\begin{DoxyCompactList}\small\item\em Outputs matrix to stream. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+{\bfseries{Class to work with matrices}} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_matrix_a4acbad349a6e741b1122053d99d4fbb9}\label{class_matrix_a4acbad349a6e741b1122053d99d4fbb9} 
+\index{Matrix@{Matrix}!Matrix@{Matrix}}
+\index{Matrix@{Matrix}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{Matrix()}{Matrix()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily Matrix\+::\+Matrix (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::vector$<$ float $>$ $>$}]{vec }\end{DoxyParamCaption})}
+
+
+
+Constructor which convert vector to \doxylink{class_matrix}{Matrix}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & 2D vector of float numbers, number of rows and columns must be constant\\
+\hline
+\end{DoxyParams}
+{\bfseries{Example using}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ main()\ \{}
+\DoxyCodeLine{\ \ \ \ std::vector<std::vector<float>>\ vec\ =\ \{\{1,\ 0.5\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{4.2,\ 8\}\};}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{class_matrix}{Matrix}}\ m(vec);}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ m\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ \Hypertarget{class_matrix_ac6c12fa8f111c7326f88cad460ae9701}\label{class_matrix_ac6c12fa8f111c7326f88cad460ae9701} 
+\index{Matrix@{Matrix}!Matrix@{Matrix}}
+\index{Matrix@{Matrix}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{Matrix()}{Matrix()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily Matrix\+::\+Matrix (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::string $>$}]{vec }\end{DoxyParamCaption})}
+
+
+
+Constructor which convert string to Matrices, can be used for reading from file. 
+
+{\bfseries{Example using}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ main()\ \{}
+\DoxyCodeLine{\ \ \ \ std::vector<std::string>\ v\ =\ \{\textcolor{stringliteral}{"{}1\ 2\ 3"{}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}4\ 5\ 6"{}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}7\ 8\ 9"{}}\};}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{class_matrix}{Matrix}}\ m(v);}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ m\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ \Hypertarget{class_matrix_a11298232ac274b1b2aed13b181634c55}\label{class_matrix_a11298232ac274b1b2aed13b181634c55} 
+\index{Matrix@{Matrix}!Matrix@{Matrix}}
+\index{Matrix@{Matrix}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{Matrix()}{Matrix()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily Matrix\+::\+Matrix (\begin{DoxyParamCaption}\item[{std\+::string}]{filename }\end{DoxyParamCaption})}
+
+
+
+Constructor which create \doxylink{class_matrix}{Matrix} from file(numbers divided by spaces and ENTERs) 
+
+{\bfseries{Example using}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ main()\ \{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{class_matrix}{Matrix}}\ m(\textcolor{stringliteral}{"{}example.txt"{}});}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ m\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_matrix_a596203ab71640c5c24042d8a23478f9a}\label{class_matrix_a596203ab71640c5c24042d8a23478f9a} 
+\index{Matrix@{Matrix}!copy@{copy}}
+\index{copy@{copy}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{copy()}{copy()}}
+{\footnotesize\ttfamily void Matrix\+::copy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_matrix}{Matrix}} \&}]{m }\end{DoxyParamCaption})}
+
+
+
+Method to copy other \doxylink{class_matrix}{Matrix} to this. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & \doxylink{class_matrix}{Matrix} from which copy \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_matrix_ab853044b1d89a9fcd62d122228a9f10c}\label{class_matrix_ab853044b1d89a9fcd62d122228a9f10c} 
+\index{Matrix@{Matrix}!determinant@{determinant}}
+\index{determinant@{determinant}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{determinant()}{determinant()}}
+{\footnotesize\ttfamily float Matrix\+::determinant (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Method to calcucate determinant. 
+
+Only with quadratic matrix
+
+{\bfseries{Example using}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ main()\ \{}
+\DoxyCodeLine{\ \ \ \ std::vector<std::vector<float>>\ vec\ =\ \{\{1,\ 0.5\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{4.2,\ 8\}\};}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{class_matrix}{Matrix}}\ m(vec);}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ m.determinant()\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ 5.9}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ \Hypertarget{class_matrix_a0bdc7d34c8630c79c8fe67b131e62d68}\label{class_matrix_a0bdc7d34c8630c79c8fe67b131e62d68} 
+\index{Matrix@{Matrix}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily std\+::vector$<$ float $>$ \& Matrix\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})}
+
+
+
+Operator thats returns row under index number. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & Number of which row should method return(starts with 0)\\
+\hline
+\end{DoxyParams}
+{\bfseries{Example using}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ main()\ \{}
+\DoxyCodeLine{\ \ \ \ std::vector<std::vector<float>>\ vec\ =\ \{\{1,\ 0.5\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{4.2,\ 8\}\};}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{class_matrix}{Matrix}}\ m(vec);}
+\DoxyCodeLine{\ \ \ \ m[1];\ \textcolor{comment}{//\ \{4.2,\ 8\}}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ \Hypertarget{class_matrix_a2db389056c84d893c5efcdcbdaed5f73}\label{class_matrix_a2db389056c84d893c5efcdcbdaed5f73} 
+\index{Matrix@{Matrix}!pow@{pow}}
+\index{pow@{pow}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{pow()}{pow()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_matrix}{Matrix}} Matrix\+::pow (\begin{DoxyParamCaption}\item[{int}]{degree }\end{DoxyParamCaption})}
+
+
+
+Method to raise quadratic matrix to any n degree. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & Can be natural, or 0, or -\/1 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Doesn\textquotesingle{}t change matrix, returns powed matrix, if n = 0 then E, if n = -\/1 then reversed matrix
+\end{DoxyReturn}
+{\bfseries{Example using}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ main()\ \{}
+\DoxyCodeLine{\ \ \ \ std::vector<std::vector<float>>\ vec\ =\ \{\{1,\ 0\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{0,\ 8\}\};}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{class_matrix}{Matrix}}\ m(vec);}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ m.pow(2)\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ 1\ 0}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ 0\ 64}}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ m.pow(0)\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ 1\ 0}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ 0\ 1}}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ m.pow(-\/1)\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ 1\ 0}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ 0\ 0.1}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ \Hypertarget{class_matrix_a895b53416971374f0f70b141d705b0b4}\label{class_matrix_a895b53416971374f0f70b141d705b0b4} 
+\index{Matrix@{Matrix}!size@{size}}
+\index{size@{size}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily std\+::pair$<$ float, float $>$ Matrix\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get\textquotesingle{}s size of matrix. 
+
+\begin{DoxyReturn}{Returns}
+First is number of rows, second is number of columns
+\end{DoxyReturn}
+{\bfseries{Example using}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ main()\ \{}
+\DoxyCodeLine{\ \ \ \ std::vector<std::vector<float>>\ vec\ =\ \{\{1,\ 0.5\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{4.2,\ 8\}\};}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{class_matrix}{Matrix}}\ m(vec);}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Rows\ -\/\ "{}}\ <<\ m.size().first\ <<\ \textcolor{stringliteral}{"{}Columns\ -\/\ "{}}\ <<\ m.size().second\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ \Hypertarget{class_matrix_ac7ab36482084929801e3422179dcfef2}\label{class_matrix_ac7ab36482084929801e3422179dcfef2} 
+\index{Matrix@{Matrix}!toE@{toE}}
+\index{toE@{toE}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{toE()}{toE()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_matrix}{Matrix}} \& Matrix\+::toE (\begin{DoxyParamCaption}\item[{float}]{n }\end{DoxyParamCaption})}
+
+
+
+Method to convert any matrix to n\texorpdfstring{$\ast$}{*}n Identity matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & Size of result matrix\\
+\hline
+\end{DoxyParams}
+{\bfseries{Example using}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ main()\ \{}
+\DoxyCodeLine{\ \ \ \ std::vector<std::vector<float>>\ vec\ =\ \{\{1,\ 0.5\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{4.2,\ 8\}\};}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{class_matrix}{Matrix}}\ m(vec);}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ m.toE(3)\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ 1\ 0\ 0}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ 0\ 1\ 0}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ 0\ 0\ 1}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ \Hypertarget{class_matrix_aa5811e28e2c23a4a92960efed9c3990c}\label{class_matrix_aa5811e28e2c23a4a92960efed9c3990c} 
+\index{Matrix@{Matrix}!toNull@{toNull}}
+\index{toNull@{toNull}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{toNull()}{toNull()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_matrix}{Matrix}} \& Matrix\+::to\+Null (\begin{DoxyParamCaption}\item[{float}]{n }\end{DoxyParamCaption})}
+
+
+
+Method to convert any matrix to n\texorpdfstring{$\ast$}{*}n matrix with all zeros. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & Size of result matrix\\
+\hline
+\end{DoxyParams}
+{\bfseries{Example using}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ main()\ \{}
+\DoxyCodeLine{\ \ \ \ std::vector<std::vector<float>>\ vec\ =\ \{\{1,\ 0.5\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{4.2,\ 8\}\};}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{class_matrix}{Matrix}}\ m(vec);}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ m.toNull(3)\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ 0\ 0\ 0}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ 0\ 0\ 0}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ 0\ 0\ 0}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ \Hypertarget{class_matrix_ad609fedfd61e93679803bb114e544569}\label{class_matrix_ad609fedfd61e93679803bb114e544569} 
+\index{Matrix@{Matrix}!transpose@{transpose}}
+\index{transpose@{transpose}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{transpose()}{transpose()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_matrix}{Matrix}} \& Matrix\+::transpose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Method to transpose matrices. 
+
+Changes rows and columns with each others(can be done only with quadratic matrix)
+
+It changes matrix itself and returns result
+
+{\bfseries{Example using}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ main()\ \{}
+\DoxyCodeLine{\ \ \ \ std::vector<std::vector<float>>\ vec\ =\ \{\{1,\ 0.5\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{4.2,\ 8\}\};}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{class_matrix}{Matrix}}\ m(vec);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//m.transpose();}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//std::cout\ <<\ m\ <<\ std::endl;}}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ m.transpose()\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ 1\ 4.2}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ 0.5\ 8}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{class_matrix_ae285effeb13307abef36fea80dcac4f0}\label{class_matrix_ae285effeb13307abef36fea80dcac4f0} 
+\index{Matrix@{Matrix}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily std\+::ostream \& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{\mbox{\hyperlink{class_matrix}{Matrix}}}]{m }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Outputs matrix to stream. 
+
+Rounds floats to the first digit after the point 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+matrix.\+h\item 
+matrix.\+cpp\end{DoxyCompactItemize}

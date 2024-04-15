@@ -1,5 +1,6 @@
 #include <iostream>
 #include "matrix.h"
+#include <exception>
 
 Matrix getMatrix() {
     std::string filename;
@@ -21,6 +22,7 @@ Matrix getMatrix() {
 int main() {
     Matrix m1 = getMatrix();
     while (1) {
+        try {
         std::cout << "Enter operation" << std::endl;
         std::cout << "+, -, *, /, ^, det, T, rank, show" << std::endl;
         std::string operation;
@@ -78,6 +80,10 @@ int main() {
         else {
             break;
         }
+        }
+    catch(std::invalid_argument ex) {
+        std::cout << ex.what() << std::endl;
+    }
     }
     return 0;
 }

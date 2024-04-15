@@ -282,6 +282,13 @@ TEST(powTest, invalidMatrix) {
     ASSERT_THROW(m1.pow(2), invalid_argument);
 }
 
+TEST(powTest, invalidReverseMatrix) {
+    vector<vector<float>> v1 = {{1, 0},
+                                {1, 0}};
+    Matrix m1(v1);
+    ASSERT_THROW(m1.pow(-1), invalid_argument);
+}
+
 TEST(powTest, test1) {
     vector<vector<float>> v1 = {{1, 0, 0},
                                 {0, 1, 2},

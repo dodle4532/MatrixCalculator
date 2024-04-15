@@ -197,6 +197,9 @@ Matrix Matrix::pow(int degree) {
     }
     Matrix m(*this);
     float det = determinant();
+    if (det == 0) {
+        throw std::invalid_argument("Matrix det is 0, no reverse Matrix");
+    }
     if (degree == -1) {
         for (int i = 0; i < table.size(); ++i) {
             for (int j = 0; j < table.size(); ++j) {

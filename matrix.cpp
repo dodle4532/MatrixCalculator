@@ -146,6 +146,42 @@ float Matrix::determinant(std::vector<std::vector<float>> m) {
     return det;
 }
 
+int Matrix::rank() {
+    int r = 0;
+    if (!(isQuadratic())) {
+        throw std::invalid_argument("Matrix is not quadratic");
+    }
+    if (determinant() != 0) {
+        return size().first;
+    }
+    if (*this == Matrix().toNull(size().first)) {
+        return 0;
+    }
+    r = size().first - 1;
+    std::vector<Matrix> storage;
+    std::vector<Matrix> storageCopy;
+    storage.push_back(*this);
+    while (1) {
+        for (int i = 0; i < size().first; ++i) {
+            for (int j = 0; j < size().first; ++j) {
+                for (int k = 0; k < storage.size(); ++k) {
+                    Matrix minor(storage[k]);
+                    minor.deleteRow(i);
+                    minor.deleteColumn(j);
+                    if (minor.determinant() != 0) {
+                        return r;
+                    }
+                    storageCopy.push_back(minor);
+                }
+            }
+        }
+        r--;
+        storage.clear();
+        storage = storageCopy;
+        storageCopy.clear();
+    }
+}
+
 float Matrix::determinant() {
     return determinant(table);
 }
@@ -187,21 +223,36 @@ std::vector<float>& Matrix::operator[](int index) {
     return table[index];
 }
 
-Matrix& Matrix::operator+(Matrix& m) {
+Matrix Matrix::operator+(Matrix& m) {
     if (m.size() != size()) {
         throw std::invalid_argument("Different size of matrices");
     }
+    Matrix result(*this);
     for (int i = 0; i < size().first; ++i) {
         for (int j = 0; j < size().second; ++j) {
-            table[i][j] += m[i][j];
+            result.table[i][j] += m[i][j];
         }
     }
-    return *this;
+    return result;
 }
 
-Matrix& Matrix::operator*(Matrix& m) {
-    if (m.size().second != size().first) {
+Matrix Matrix::operator-(Matrix& m) {
+    if (m.size() != size()) {
         throw std::invalid_argument("Different size of matrices");
+    }
+    Matrix result(*this);
+    for (int i = 0; i < size().first; ++i) {
+        for (int j = 0; j < size().second; ++j) {
+            result.table[i][j] -= m[i][j];
+        }
+    }
+    return result;
+}
+
+
+Matrix Matrix::operator*(Matrix& m) {
+    if (m.size().second != size().first) {
+        throw std::invalid_argument("Incorrect size of matrices");
     }
     std::vector<std::vector<float>> v;
     std::vector<float> string;
@@ -220,8 +271,12 @@ Matrix& Matrix::operator*(Matrix& m) {
             }
         }
     }
-    copy(matrix);
-    return *this;
+    return matrix;
+}
+
+Matrix Matrix::operator/(Matrix& m) {
+    Matrix reverse = m.pow(-1);
+    return *this * reverse;
 }
 
 bool Matrix::operator==(Matrix& m) {

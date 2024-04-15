@@ -252,6 +252,29 @@ TEST(detTest, invalidMatrix) {
     ASSERT_THROW(m1.determinant(), invalid_argument);
 }
 
+TEST(rankTest, rankIsSize) {
+    std::vector<std::vector<float>> v1 = {{1, 2, 3},
+                                        {4, 2, 1},
+                                        {3, 4, 5}};
+    Matrix m(v1);
+    ASSERT_TRUE(m.rank() == 3);
+}
+
+TEST(rankTest, rankIsOneLess) {
+    std::vector<std::vector<float>> vec = {{1, 2},
+                                           {1, 2}};
+    Matrix m(vec);
+    ASSERT_TRUE(m.rank() == 1);
+}
+
+TEST(rankTest, rankIsTwoLess) {
+    std::vector<std::vector<float>> v1 = {{1, 2, 3},
+                                        {3, 6, 9},
+                                        {2, 4, 6}};
+    Matrix m(v1);
+    ASSERT_TRUE(m.rank() == 1);
+}
+
 TEST(powTest, invalidMatrix) {
     vector<vector<float>> v1 = {{1, 0, 0},
                                 {0, 1, 2}};

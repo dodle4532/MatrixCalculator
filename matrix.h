@@ -167,6 +167,24 @@ public:
     float determinant();
 
     /*!
+        \brief Method to calcucate rang
+        \details Only with quadratic matrix
+
+        <b>Example using</b>
+        \code 
+        int main() {
+            std::vector<std::vector<float>> vec = {{1, 2},
+                                                   {1, 2}};
+            Matrix m(vec);
+            std::cout << m.rank() << std::endl;
+            // 1
+            return 0;
+        }
+        \endcode
+    */
+    int rank();
+
+    /*!
         \brief Method to raise quadratic matrix to any n degree
         \param n Can be natural, or 0, or -1
         \return Doesn't change matrix, returns powed matrix, if n = 0 then E, if n = -1 then reversed matrix
@@ -212,12 +230,22 @@ public:
     /*!
         \brief Operator to add two Matrices
     */
-    Matrix& operator+(Matrix& m);
+    Matrix operator+(Matrix& m);
 
     /*!
-        \brief Operator to multiply to matrices
+        \brief Operator to substract two Matrices
     */
-    Matrix& operator*(Matrix& m);
+    Matrix operator-(Matrix& m);
+
+    /*!
+        \brief Operator to multiply matrices
+    */
+    Matrix operator*(Matrix& m);
+
+    /*!
+        \brief Operator to divide matrices (multiply on reversed Matrix)
+    */
+    Matrix operator/(Matrix& m);
 
     /*!
         \brief Operator to check if matrices is equal or not

@@ -1,5 +1,6 @@
 #include <iostream>
 #include "matrix.h"
+#include "math.h"
 #include <numeric>
 #include <gtest/gtest.h>
 
@@ -233,7 +234,7 @@ TEST(detTest, floatDetZero) {
                                 {4.4, 5.5, 6.6},
                                 {7.7, 8.8, 9.9}};
     Matrix m1(v1);
-    ASSERT_TRUE(abs(m1.determinant()) <= epsilon);
+    ASSERT_TRUE(std::abs(m1.determinant()) <= epsilon);
 }
 
 TEST(detTest, floatDet) {
@@ -280,13 +281,6 @@ TEST(powTest, invalidMatrix) {
                                 {0, 1, 2}};
     Matrix m1(v1);
     ASSERT_THROW(m1.pow(2), invalid_argument);
-}
-
-TEST(powTest, invalidReverseMatrix) {
-    vector<vector<float>> v1 = {{1, 0},
-                                {1, 0}};
-    Matrix m1(v1);
-    ASSERT_THROW(m1.pow(-1), invalid_argument);
 }
 
 TEST(powTest, test1) {

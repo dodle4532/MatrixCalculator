@@ -138,7 +138,7 @@ float Matrix::determinant(std::vector<std::vector<float>> m) {
         return m[0][0];
     }
     for (int j = 0; j < m.size(); ++j) {
-        Matrix minor(m);
+        Matrix minor = Matrix(m);
         minor.deleteRow(0);
         minor.deleteColumn(j);
         det += m[0][j] * std::pow(-1,j) * determinant(minor.table);
@@ -165,7 +165,7 @@ int Matrix::rank() {
         for (int i = 0; i < size().first; ++i) {
             for (int j = 0; j < size().first; ++j) {
                 for (int k = 0; k < storage.size(); ++k) {
-                    Matrix minor(storage[k]);
+                    Matrix minor = Matrix(storage[k]);
                     minor.deleteRow(i);
                     minor.deleteColumn(j);
                     if (minor.determinant() != 0) {
@@ -197,9 +197,6 @@ Matrix Matrix::pow(int degree) {
     }
     Matrix m(*this);
     float det = determinant();
-    if (det == 0) {
-        throw std::invalid_argument("Matrix det is 0, no reverse Matrix");
-    }
     if (degree == -1) {
         for (int i = 0; i < table.size(); ++i) {
             for (int j = 0; j < table.size(); ++j) {

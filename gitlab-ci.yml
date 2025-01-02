@@ -1,0 +1,246 @@
+stages:          # List of stages for jobs, and their order of execution
+  - build
+  - test
+  - deploy
+  - docs
+  - package
+  - package-test
+build-job-ubuntu:
+  variables:
+      GIT_SUBMODULE_STRATEGY: recursive
+  stage: build
+  script:
+    - cd googletest
+    - cmake -S . -B build
+    - cd build
+    - make -j 4
+    - cd ../../
+    - make all
+  artifacts:
+    paths:
+      - ./calc
+      - ./test
+  
+  tags:
+      - ubuntu
+
+unit-test-job-ubuntu:
+  stage: test
+  needs: ["build-job-ubuntu"]
+  script:
+    - ./test --gtest_output="xml:report.xml"
+  artifacts:
+    paths:
+      - ./calc
+    name: "ubuntu_test_results"
+    reports:
+      junit: ./report.xml
+  tags:
+    - ubuntu
+
+delpoy-job-ubuntu:
+  stage: deploy
+  needs: ["unit-test-job-ubuntu"]
+  script:
+    - ./calc example.txt / example.txt
+  
+  tags:
+    - ubuntu
+
+docs-build: 
+  stage: docs
+  dependencies:
+    - build-job-ubuntu
+  needs: 
+  - job: 'delpoy-job-ubuntu'
+  - job: 'build-job-ubuntu'
+  before_script:
+    - apt install doxygen -y
+  script:
+    - doxygen -g
+    - doxygen Doxyfile
+    - mkdir docs
+    - mv {html,latex} docs
+  artifacts:
+    paths:
+      - docs
+    name: "docs_arc"
+  tags:
+    - ubuntu
+
+package-ubuntu:
+  stage: package
+  dependencies:
+    - build-job-ubuntu
+  needs: 
+  - job: 'delpoy-job-ubuntu'
+  - job: 'build-job-ubuntu'
+  script:
+    - mkdir mCalc
+    - cd mCalc
+    - touch postinst 
+    - |
+      cat <<EOT >> postinst
+      #!/bin/bash
+      echo "Matrix calculator was installed"
+      EOT
+    - mkdir usr
+    - cd usr
+    - mkdir {bin,etc}
+    - cd ..
+    - mkdir DEBIAN
+    - chmod 0755 postinst
+    - mv postinst DEBIAN
+    - touch DEBIAN/control
+    - |
+      cat <<EOT >> DEBIAN/control
+      Package: mCalc
+      Version: 1.0-1
+      Section: unknown
+      Priority: optional
+      Depends: libc6, lib32stdc++6, libstdc++6, libgcc1, lib32gcc1
+      Architecture: all
+      Maintainer: Kochnov Igor <dodle4532@gmail.com>
+      Description: Matrix Calculator, check readme for instructions
+      EOT
+    - cd .. 
+    - mv calc mCalc/usr/bin
+    - dpkg-deb --build mCalc
+  artifacts:
+    paths:
+      - ./mCalc.deb
+  tags:
+    - ubuntu
+
+package-test-ubuntu:
+  stage: package-test
+  dependencies:
+    - package-ubuntu
+  needs: 
+  - job: 'delpoy-job-ubuntu'
+  - job: 'build-job-ubuntu'
+  - job: 'package-ubuntu'
+  script:
+    - sudo dpkg --install --force-overwrite mCalc.deb
+    - dpkg -L mCalc
+    - calc example.txt - example.txt
+  tags:
+    - ubuntu
+
+
+build-job-centos:       # This job runs in the build stage, which runs first.
+  stage: build
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+  script:
+    - cd googletest
+    - cmake -S . -B build
+    - cd build
+    - make -j 4
+    - cd ../../
+    - make all
+  artifacts:
+    paths:
+      - ./test
+      - ./calc
+  
+  tags:
+      - centos
+
+unit-test-job-centos:   # This job runs in the test stage.
+  stage: test    # It only starts when the job in the build stage completes successfully.
+  needs: ["build-job-centos"]
+  script:
+    - ./test --gtest_output="xml:report.xml"
+  artifacts:
+    name: "centos_test_results"
+    reports:
+      junit: ./report.xml
+  tags:
+    - centos
+
+delpoy-job-centos:
+  stage: deploy
+  needs: 
+  - job: "unit-test-job-centos"
+  - job: "build-job-centos"
+  dependencies:
+    - build-job-centos
+    - unit-test-job-centos
+  script:
+    - ./calc example.txt / example.txt
+  
+  tags:
+    - centos
+
+
+package-centos:
+  stage: package
+  dependencies:
+    - build-job-centos
+  needs: 
+  - job: 'delpoy-job-centos'
+  - job: 'build-job-centos'
+  script:
+    - yum install -y rpmdevtools rpmlint
+    - mkdir -p rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
+    - mkdir calcDir
+    - mv calc calcDir/
+    - tar -cvzf calc-0.1.tar.gz calcDir
+    - mv calc-0.1.tar.gz rpmbuild/SOURCES
+    - mv -t rpmbuild/BUILD matrix.cpp main.cpp matrix.h Makefile
+
+    - touch rpmbuild/SPECS/mCalc.spec
+    - |
+      cat <<EOT >> rpmbuild/SPECS/mCalc.spec
+      Name:           calc
+      Version:        1.0
+      Release:        1%{?dist}
+      Summary:        Matrix Calculator
+
+      License:        GPLv3+
+      URL:            https://vgit.mirea.ru/dodle4532/MatrixCalculator/
+      Source0:        https://vgit.mirea.ru/dodle4532/MatrixCalculator/
+
+      BuildRequires:  gcc
+      BuildRequires:  make
+
+      %description
+      This is Matrix Calculator, check readme for instructions
+
+      %build
+      make build
+
+      %install
+      %make_install
+
+      %files
+      %{_bindir}/%{name}
+
+      %changelog
+      * Sat May 11 2024 Kochnov Igor <dodle4532@gmail.com> - 1.0-1
+      First Matrix Calculator package
+      EOT
+    - mv rpmbuild ~/
+    - rpmbuild -bb ~/rpmbuild/SPECS/mCalc.spec
+    - mv ~/rpmbuild/RPMS/x86_64/calc-1.0-1.el7.x86_64.rpm .
+  artifacts:
+    paths:
+      - ./calc-1.0-1.el7.x86_64.rpm
+  tags:
+    - centos
+
+package-test-centos:
+  stage: package-test
+  dependencies:
+    - package-centos
+  needs: 
+  - job: 'delpoy-job-centos'
+  - job: 'build-job-centos'
+  - job: 'package-centos'
+  script:
+    - yum install -y calc-1.0-1.el7.x86_64.rpm
+    - rpm -ql calc-1.0-1.el7.x86_64
+    - calc example.txt - example.txt
+  tags:
+    - centos
